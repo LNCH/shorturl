@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\LinkRedirectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Handle redirects for any links
+Route::get('r/{code}', [LinkRedirectController::class, 'redirect'])->name('redirect');
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+    Route::resource('links', LinkController::class);
+
+});
 
 require __DIR__.'/auth.php';
