@@ -1,0 +1,25 @@
+@layer components {
+    table thead {
+        @apply bg-gray-50;
+    }
+
+    table thead th {
+        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    }
+
+    table thead th.actions {
+        @apply relative px-6 py-3;
+    }
+
+    table tbody {
+        @apply bg-white divide-y divide-gray-200;
+    }
+
+    table tbody td {
+        @apply px-6 py-4 whitespace-nowrap;
+    }
+
+    table tfoot td {
+        @apply bg-gray-50 text-sm px-6 py-4 text-center;
+    }
+}

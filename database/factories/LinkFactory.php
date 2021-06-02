@@ -29,7 +29,8 @@ class LinkFactory extends Factory
         ];
 
         return [
-            'name' => implode(' ', $this->faker->words(3)),
+            'name' => ucwords(implode(' ', $this->faker->words(3))),
+            'status' => Link::STATUS_ACTIVE,
             'destination_url' => $this->faker->randomElement($destinationUrls),
             'unique_key' => Str::random(5),
             'expires_at' => random_int(0, 1) ? Carbon::now()->addDays(random_int(10,30)) : null,

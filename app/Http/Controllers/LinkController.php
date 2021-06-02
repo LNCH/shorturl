@@ -48,7 +48,7 @@ class LinkController extends Controller
      */
     public function show(Link $link)
     {
-        //
+        dd($link, $link->checkStatus());
     }
 
     /**
