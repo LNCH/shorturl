@@ -43,7 +43,8 @@ class LinkController extends Controller
         }
 
         $link = Link::create($data);
-        dd($link);
+
+        return redirect()->route('links.index');
     }
 
     /**
