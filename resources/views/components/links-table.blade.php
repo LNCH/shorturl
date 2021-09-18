@@ -11,44 +11,50 @@
     </tr>
     </thead>
     <tbody>
-    @foreach ($links as $link)
-        <tr>
-            <td>
-                <div class="text-sm font-medium text-gray-900">
-                    <a href="{{ route('links.show', $link) }}">
-                        {{ $link->name }}
-                    </a>
-                </div>
-                <div class="text-sm text-gray-500">
-                    {{ $link->destination_url }}
-                </div>
-            </td>
-            <td>
-                <div class="text-sm text-gray-900">
-                    <a href="{{ $link->shortUrl }}" target="short_url_{{ $link->unique_key }}">
-                        {{ $link->shortUrl }}
-                    </a>
-                </div>
-            </td>
-            <td>
-                <x-link-status :status="$link->status" />
-            </td>
-            <td>
-                <span class="text-sm text-gray-500">
-                    {{ $link->visits }}
-                </span>
-            </td>
-            <td class="text-right text-sm font-medium">
-                <a href="#">Edit</a>
-            </td>
-        </tr>
-    @endforeach
+        @forelse ($links as $link)
+            <tr>
+                <td>
+                    <div class="text-sm font-medium text-gray-900">
+                        <a href="{{ route('links.show', $link) }}">
+                            {{ $link->name }}
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        {{ $link->destination_url }}
+                    </div>
+                </td>
+                <td>
+                    <div class="text-sm text-gray-900">
+                        <a href="{{ $link->shortUrl }}" target="short_url_{{ $link->unique_key }}">
+                            {{ $link->shortUrl }}
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <x-link-status :status="$link->status" />
+                </td>
+                <td>
+                    <span class="text-sm text-gray-500">
+                        {{ $link->visits }}
+                    </span>
+                </td>
+                <td class="text-right text-sm font-medium">
+                    <a href="#">Edit</a>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5" class="text-center">No links found, use the 'New Link' button above to create a short URL</td>
+            </tr>
+        @endforelse
     </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5">
-                {{ $links->links() }}
-            </td>
-        </tr>
-    </tfoot>
+    @if (count($links))
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    {{ $links->links() }}
+                </td>
+            </tr>
+        </tfoot>
+    @endif
 </x-table>
