@@ -30,6 +30,7 @@ class LinkFactory extends Factory
 
         return [
             'name' => ucwords(implode(' ', $this->faker->words(3))),
+            'type' => $this->faker->randomElement(array_keys(Link::TYPES)),
             'status' => Link::STATUS_ACTIVE,
             'destination_url' => $this->faker->randomElement($destinationUrls),
             'unique_key' => Str::random(5),

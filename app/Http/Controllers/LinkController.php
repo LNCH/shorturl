@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LinkController extends Controller
 {
@@ -14,9 +15,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = Link::all();
-
-        return view('links.index', compact('links'));
+        return view('links.index');
     }
 
     /**
@@ -26,7 +25,7 @@ class LinkController extends Controller
      */
     public function create()
     {
-        //
+        return view('links.create');
     }
 
     /**
@@ -37,7 +36,14 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        if ($data['type'] == Link::TYPE_SIMPLE && empty($data['unique_key'])) {
+            $data['unique_key'] = Str::random(5);
+        }
+
+        $link = Link::create($data);
+        dd($link);
     }
 
     /**

@@ -27,6 +27,15 @@ class Link extends Model
         self::TYPE_FRIENDLY => 'Friendly URL',
     ];
 
+    protected $fillable = [
+        'name',
+        'type',
+        'status',
+        'destination_url',
+        'unique_key',
+        'expires_at',
+    ];
+
     public function getShortUrlAttribute()
     {
         return route('redirect', ['code' => $this->unique_key]);
