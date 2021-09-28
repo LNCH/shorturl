@@ -42,8 +42,8 @@ class LinkController extends Controller
      */
     public function store(CreateRequest $request): RedirectResponse
     {
-        Link::create($request->validated());
-        return redirect()->route('links.index');
+        $link = Link::create($request->validated());
+        return redirect()->route('links.show', $link);
     }
 
     /**
