@@ -30,7 +30,7 @@ class ShortUrl extends Mailable
      */
     public function build()
     {
-        return $this->from('someone@pawprintvets.com')
+        return $this->from(config('mail.from.address', 'admin@example.com'))
             ->subject('Your link from Paw Print Vets')
             ->markdown('emails.send-short-url');
     }
