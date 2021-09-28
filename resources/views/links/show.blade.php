@@ -8,6 +8,16 @@
             </div>
             <div>
                 <a class="button" href="{{ route('links.edit', $link) }}">Edit Link</a>
+                <form
+                    action="{{ route('links.destroy', $link) }}"
+                    method="post"
+                    style="display: inline;"
+                    onsubmit="return confirm('Are you sure you want to delete this link?');"
+                >
+                    @csrf()
+                    @method('DELETE')
+                    <button class="button button-danger">Delete</button>
+                </form>
             </div>
         </div>
     </x-slot>
@@ -16,7 +26,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="flex">
-                <div class="w-3/5 mr-4">
+                <div class="w-2/3 mr-4">
                     <x-panel>
                         <h2 class="text-lg font-bold mb-4">Link Details</h2>
 
@@ -48,9 +58,13 @@
                             <div class="font-bold opacity-80">Total Views</div>
                             {{ $link->visits }}
                         </div>
+
+                        <button class="button ml-0" onclick="Livewire.emit('openModal', 'email-link-modal', {{ json_encode(["link" => $link->id]) }})">
+                            Email Link
+                        </button>
                     </x-panel>
                 </div>
-                <div class="w-2/5">
+                <div class="w-1/3">
                     <x-panel>
                         <div class="p-8 pb-6">
                             <a href="{{ route('links.qr', $link) }}" target="_qr-{{ $link->id }}">
@@ -63,8 +77,6 @@
                     </x-panel>
                 </div>
             </div>
-
-
 
         </div>
     </div>

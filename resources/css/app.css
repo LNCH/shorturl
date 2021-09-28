@@ -10,7 +10,10 @@
     }
 
     .button {
-        @apply inline-flex font-bold items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+        @apply inline-flex ml-1 font-bold items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+    }
+    .button.button-danger {
+        @apply bg-red-500 hover:bg-red-700 focus:ring-red-500;
     }
 }
 
@@ -21,4 +24,21 @@
 .navigation-logo a img {
     margin-top: 1rem;
     max-height: calc(100% - 2rem);
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom: 1px solid gainsboro;
+    opacity: 0.7;
+}
+
+.modal-body {
+    padding: 1rem 1.5rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid gainsboro;
 }

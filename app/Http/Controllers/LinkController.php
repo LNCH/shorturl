@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Links\CreateRequest;
 use App\Http\Requests\Links\UpdateRequest;
+use App\Mail\ShortUrl;
 use App\Models\Link;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -84,14 +85,21 @@ class LinkController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Link $link
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Link $link)
+    public function destroy(Link $link): RedirectResponse
     {
-        //
+        $link->delete();
+        return redirect()->route('links.index');
     }
 
-    public function qr(Link $link)
+    /**
+     * Displays the Link's QR code as a standalone image.
+     *
+     * @param Link $link
+     * @return Response
+     */
+    public function qr(Link $link): Response
     {
         return response($link->qrCodeImage)
             ->header('Content-type','image/png');

@@ -65,11 +65,14 @@ class Link extends Model
 
     public function getQrCodeImageAttribute()
     {
-        return QrCode::size(1024)
-            ->format('png')
-            ->style('dot', 0.9)
-            ->gradient(245, 66, 230, 0, 0, 0, 'radial')
-            ->generate($this->shortUrl);
+        $cacheKey = "linkQrCode_{$this->id}_{$this->updated_at->timestamp}";
+        return cache()->rememberForever($cacheKey, function () {
+            return QrCode::size(1024)
+                ->format('png')
+                ->style('dot', 0.9)
+                ->gradient(245, 66, 230, 0, 0, 0, 'radial')
+                ->generate($this->shortUrl);
+        });
     }
 
     public function checkStatus()

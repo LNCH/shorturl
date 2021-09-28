@@ -39,7 +39,17 @@
                     </span>
                 </td>
                 <td class="text-right text-sm font-medium">
-                    <a href="{{ route('links.edit', $link) }}">Edit</a>
+                    <a href="{{ route('links.edit', $link) }}" class="button">Edit</a>
+                    <form
+                        action="{{ route('links.destroy', $link) }}"
+                        method="post"
+                        style="display: inline;"
+                        onsubmit="return confirm('Are you sure you want to delete this link?');"
+                    >
+                        @csrf()
+                        @method('DELETE')
+                        <button class="button button-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         @empty
