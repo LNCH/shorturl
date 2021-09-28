@@ -3,4 +3,4 @@
 {{--</svg>--}}
 
 <img src="https://www.pawprintvets.co.uk/wp-content/themes/pawprint/assets/img/logo_black.png"
-     alt="Paw Print Veterinary Practice" />
+     alt="Paw Print Veterinary Practice" style="max-width: 250px;" />

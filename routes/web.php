@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Handle redirects for any links
 Route::get('r/{code}', [LinkRedirectController::class, 'redirect'])->name('redirect');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::view('/', 'dashboard')->name('dashboard');
 
     Route::get('link/{link}/qr', [LinkController::class, 'qr'])->name('links.qr');
     Route::resource('links', LinkController::class);
