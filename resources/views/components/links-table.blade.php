@@ -39,7 +39,7 @@
                     </span>
                 </td>
                 <td class="text-right text-sm font-medium">
-                    <a href="#">Edit</a>
+                    <a href="{{ route('links.edit', $link) }}">Edit</a>
                 </td>
             </tr>
         @empty

@@ -8,11 +8,16 @@
     a {
         @apply text-indigo-600 hover:text-indigo-900;
     }
+
+    .button {
+        @apply inline-flex font-bold items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+    }
 }
 
 .navigation-logo a {
     max-height: 100%;
 }
+
 .navigation-logo a img {
     margin-top: 1rem;
     max-height: calc(100% - 2rem);

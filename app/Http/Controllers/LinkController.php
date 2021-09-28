@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Links\CreateRequest;
+use App\Http\Requests\Links\UpdateRequest;
 use App\Models\Link;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
 class LinkController extends Controller
@@ -11,7 +16,7 @@ class LinkController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,9 +26,9 @@ class LinkController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Renderable
      */
-    public function create()
+    public function create(): Renderable
     {
         return view('links.create');
     }
@@ -31,61 +36,55 @@ class LinkController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        $data = $request->all();
-
-        if ($data['type'] == Link::TYPE_SIMPLE && empty($data['unique_key'])) {
-            $data['unique_key'] = Str::random(5);
-        }
-
-        $link = Link::create($data);
-
+        Link::create($request->validated());
         return redirect()->route('links.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Link  $link
-     * @return \Illuminate\Http\Response
+     * @param Link $link
+     * @return Renderable
      */
-    public function show(Link $link)
+    public function show(Link $link): Renderable
     {
-        dd($link, $link->checkStatus());
+        return view('links.show', compact('link'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Link  $link
-     * @return \Illuminate\Http\Response
+     * @param Link $link
+     * @return Renderable
      */
-    public function edit(Link $link)
+    public function edit(Link $link): Renderable
     {
-        //
+        return view('links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Link  $link
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param Link $link
+     * @return RedirectResponse
      */
-    public function update(Request $request, Link $link)
+    public function update(UpdateRequest $request, Link $link): RedirectResponse
     {
-        //
+        $link->update($request->validated());
+        return redirect()->route('links.show', $link);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Link  $link
-     * @return \Illuminate\Http\Response
+     * @param Link $link
+     * @return Response
      */
     public function destroy(Link $link)
     {

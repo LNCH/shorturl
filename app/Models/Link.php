@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Link extends Model
 {
@@ -36,9 +38,37 @@ class Link extends Model
         'expires_at',
     ];
 
+    protected $dates = [
+        'expires_at',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * Returns the Short URL for this link.
+     *
+     * @return string
+     */
     public function getShortUrlAttribute()
     {
         return route('redirect', ['code' => $this->unique_key]);
+    }
+
+    public function getQrCodeAttribute()
+    {
+        return QrCode::size(300)
+            ->style('dot', 0.9)
+            ->gradient(245, 66, 230, 0, 0, 0, 'radial')
+            ->generate($this->shortUrl);
+    }
+
+    public function getQrCodeImageAttribute()
+    {
+        return QrCode::size(512)
+            ->format('png')
+            ->style('dot', 0.9)
+            ->gradient(245, 66, 230, 0, 0, 0, 'radial')
+            ->generate($this->shortUrl);
     }
 
     public function checkStatus()
@@ -54,5 +84,16 @@ class Link extends Model
         curl_close($ch);
 
         return $statusCode ?? false;
+    }
+
+    public function getLiveStatusAttribute()
+    {
+        $status = $this->checkStatus();
+
+        if (Str::startsWith($status, 2)) {
+            return self::STATUS_ACTIVE;
+        }
+
+        return self::STATUS_BROKEN;
     }
 }

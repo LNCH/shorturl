@@ -5,16 +5,14 @@
                 {{ __('Links') }}
             </h2>
             <div>
-                <a href="{{ route('links.create') }}">New Link</a>
+                <a class="button" href="{{ route('links.create') }}">New Link</a>
             </div>
         </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <x-links-table />
-
         </div>
     </div>
 </x-app-layout>
