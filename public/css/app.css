@@ -32159,6 +32159,15 @@ a:hover {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+.navigation-logo a {
+  max-height: 100%;
+}
+
+.navigation-logo a img {
+  margin-top: 1rem;
+  max-height: calc(100% - 2rem);
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
