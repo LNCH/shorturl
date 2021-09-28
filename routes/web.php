@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
+    Route::get('link/{link}/qr', [LinkController::class, 'qr'])->name('links.qr');
     Route::resource('links', LinkController::class);
 
 });

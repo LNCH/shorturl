@@ -5,7 +5,6 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-1">
                     {{ $link->name }}
                 </h2>
-                <x-link-status :status="$link->liveStatus" />
             </div>
             <div>
                 <a class="button" href="{{ route('links.edit', $link) }}">Edit Link</a>
@@ -16,9 +15,56 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <x-panel>
-                <img style="max-width: 128px;" src="data:image/png;base64, {{ base64_encode($link->qrCodeImage) }}" alt="">
-            </x-panel>
+            <div class="flex">
+                <div class="w-3/5 mr-4">
+                    <x-panel>
+                        <h2 class="text-lg font-bold mb-4">Link Details</h2>
+
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Name</div>
+                            {{ $link->name }}
+                        </div>
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Description</div>
+                            {{ $link->description ?? 'Not set' }}
+                        </div>
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Destination URL</div>
+                            <a href="{{ $link->destination_url }}" target="_linkDestination-{{ $link->id }}">
+                                {{ $link->destination_url }}
+                            </a>
+                        </div>
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Shortened URL</div>
+                            <a href="{{ $link->shortUrl }}" target="short_url_{{ $link->unique_key }}">
+                                {{ $link->shortUrl }}
+                            </a>
+                        </div>
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Expiry Date</div>
+                            {{ $link->expires_at ? $link->expires_at->format('jS F Y, H:i') : 'Does not expire' }}
+                        </div>
+                        <div class="mb-4">
+                            <div class="font-bold opacity-80">Total Views</div>
+                            {{ $link->visits }}
+                        </div>
+                    </x-panel>
+                </div>
+                <div class="w-2/5">
+                    <x-panel>
+                        <div class="p-8 pb-6">
+                            <a href="{{ route('links.qr', $link) }}" target="_qr-{{ $link->id }}">
+                                <img style="max-width: 100%" src="data:image/png;base64, {{ base64_encode($link->qrCodeImage) }}" alt="">
+                            </a>
+                            <p class="text-center mt-6 font-bold opacity-90">
+                                Click the QR code to open in a new tab
+                            </p>
+                        </div>
+                    </x-panel>
+                </div>
+            </div>
+
+
 
         </div>
     </div>

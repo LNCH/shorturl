@@ -51,7 +51,7 @@ class LinkController extends Controller
      * @param Link $link
      * @return Renderable
      */
-    public function show(Link $link): Renderable
+    public function show(Link $link)
     {
         return view('links.show', compact('link'));
     }
@@ -89,5 +89,11 @@ class LinkController extends Controller
     public function destroy(Link $link)
     {
         //
+    }
+
+    public function qr(Link $link)
+    {
+        return response($link->qrCodeImage)
+            ->header('Content-type','image/png');
     }
 }

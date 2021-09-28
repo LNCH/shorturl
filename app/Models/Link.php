@@ -34,6 +34,7 @@ class Link extends Model
         'type',
         'status',
         'destination_url',
+        'description',
         'unique_key',
         'expires_at',
     ];
@@ -56,7 +57,7 @@ class Link extends Model
 
     public function getQrCodeAttribute()
     {
-        return QrCode::size(300)
+        return QrCode::size(1024)
             ->style('dot', 0.9)
             ->gradient(245, 66, 230, 0, 0, 0, 'radial')
             ->generate($this->shortUrl);
@@ -64,7 +65,7 @@ class Link extends Model
 
     public function getQrCodeImageAttribute()
     {
-        return QrCode::size(512)
+        return QrCode::size(1024)
             ->format('png')
             ->style('dot', 0.9)
             ->gradient(245, 66, 230, 0, 0, 0, 'radial')

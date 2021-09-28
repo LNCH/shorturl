@@ -33,6 +33,9 @@ class UpdateRequest extends FormRequest
             'destination_url' => [
                 'required', 'url',
             ],
+            'description' => [
+                'nullable', 'string', 'max:65535',
+            ],
             'status' => [
                 'required', "in:$statuses",
             ],

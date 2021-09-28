@@ -75,6 +75,25 @@
 
         </div> <!-- End .max-w-lg -->
 
+        <div class="max-w-xl">
+
+            <div class="mb-6">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <div class="mt-1">
+                    <textarea
+                        name="description"
+                        id="description"
+                        rows="8"
+                        class="shadow-sm block w-full sm:text-sm border-gray-300 rounded-md"
+                        aria-describedby="description-description"
+                    >{{ old('description', $link->description ?? '') }}</textarea>
+                </div>
+                <p class="mt-2 text-sm text-gray-500" id="description-description">A brief description of the
+                    content of the destination URL.</p>
+            </div>
+
+        </div> <!-- End .max-w-lg -->
+
         <div class="max-w-xs">
 
             <div class="mb-6">
