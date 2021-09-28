@@ -38,7 +38,7 @@
                         {{ $link->visits }}
                     </span>
                 </td>
-                <td class="text-right text-sm font-medium">
+                <td class="actions text-right text-sm font-medium">
                     <a href="{{ route('links.edit', $link) }}" class="button">Edit</a>
                     <form
                         action="{{ route('links.destroy', $link) }}"

@@ -828,6 +828,9 @@ table tbody td {
   padding-bottom: 1rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+table tbody td.actions {
   white-space: nowrap;
 }
 

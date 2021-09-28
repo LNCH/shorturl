@@ -16,7 +16,10 @@
     }
 
     table tbody td {
-        @apply px-6 py-4 whitespace-nowrap;
+        @apply px-6 py-4;
+    }
+    table tbody td.actions {
+        @apply whitespace-nowrap;
     }
 
     table tfoot td {
